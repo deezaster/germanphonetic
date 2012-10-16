@@ -1,6 +1,17 @@
+Phonetischer Algorithmus nach dem Kölner Verfahren
+==================================================
 
-<h1>Phonetischer Algorithmus nach dem Kölner Verfahren</h1>
+Implementationen
+----------------
 
+
+- **Oracle PL/SQL**: `x3m_soundex_ger.sql`
+
+- **PHP**: `x3m_soundex_ger.php`
+
+
+Einleitung
+----------
 Die Kölner Phonetik (auch Kölner Verfahren) ist ein phonetischer Algorithmus, der Wörtern nach ihrem Sprachklang eine Zeichenfolge zuordnet, den phonetischen Code. Ziel dieses Verfahrens ist es, gleich klingenden Wörtern den selben Code zuzuordnen, um bei Suchfunktionen eine Ähnlichkeitssuche zu implementieren. Damit ist es beispielsweise möglich, in einer Namensliste Einträge wie "Meier" auch unter anderen Schreibweisen, wie "Maier", "Mayer" oder "Mayr", zu finden.
 
 Die Kölner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren, besser auf die deutsche Sprache abgestimmt. Sie wurde 1969 von Postel veröffentlicht. 
@@ -8,7 +19,8 @@ Die Kölner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren
 
 
 
-<h2>Algorithmus</h2>
+Algorithmus
+-----------
 
 Die Kölner Phonetik bildet jeden Buchstaben eines Wortes auf eine Ziffer
  zwischen "0" und "8" ab, wobei für die Auswahl der jeweiligen Ziffer 
@@ -20,105 +32,28 @@ phonetische Code für "Wikipedia" lautet "3412". Im Gegensatz zum
 Soundex-Code ist die Länge des phonetischen Codes nach der Kölner 
 Phonetik nicht beschränkt.
 
-<table style="width: 550px;">
-<thead>
-<tr>
-<th>Buchstabe</th>
-<th>Kontext</th>
-<th align="center">Code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>A, E, I, J, O, U, Y</strong></td>
-<td>&nbsp;</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td><strong>H</strong></td>
-<td>&nbsp;</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td><strong>B</strong></td>
-<td>&nbsp;</td>
-<td align="center" rowspan="2">1</td>
-</tr>
-<tr>
-<td><strong>P</strong></td>
-<td>nicht vor H</td>
-</tr>
-<tr>
-<td><strong>D, T</strong></td>
-<td>nicht vor C, S, Z</td>
-<td align="center">2</td>
-</tr>
-<tr>
-<td><strong>F, V, W</strong></td>
-<td>&nbsp;</td>
-<td align="center" rowspan="2">3</td>
-</tr>
-<tr>
-<td><strong>P</strong></td>
-<td>vor H</td>
-</tr>
-<tr>
-<td><strong>G, K, Q</strong></td>
-<td>&nbsp;</td>
-<td align="center" rowspan="3">4</td>
-</tr>
-<tr>
-<td rowspan="2"><strong>C</strong></td>
-<td>im Anlaut vor A, H, K, L, O, Q, R, U, X</td>
-</tr>
-<tr>
-<td>vor A, H, K, O, Q, U, X außer nach S, Z</td>
-</tr>
-<tr>
-<td><strong>X</strong></td>
-<td>nicht nach C, K, Q</td>
-<td align="center">48</td>
-</tr>
-<tr>
-<td><strong>L</strong></td>
-<td>&nbsp;</td>
-<td align="center">5</td>
-</tr>
-<tr>
-<td><strong>M, N</strong></td>
-<td>&nbsp;</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td><strong>R</strong></td>
-<td>&nbsp;</td>
-<td align="center">7</td>
-</tr>
-<tr>
-<td><strong>S, Z</strong></td>
-<td>&nbsp;</td>
-<td align="center" rowspan="6">8</td>
-</tr>
-<tr>
-<td rowspan="3"><strong>C</strong></td>
-<td>nach S, Z</td>
-</tr>
-<tr>
-<td>im Anlaut außer vor A, H, K, L, O, Q, R, U, X</td>
-</tr>
-<tr>
-<td>nicht vor A, H, K, O, Q, U, X</td>
-</tr>
-<tr>
-<td><strong>D, T</strong></td>
-<td>vor C, S, Z</td>
-</tr>
-<tr>
-<td><strong>X</strong></td>
-<td>nach C, K, Q</td>
-</tr>
-</tbody>
-</table>
+Buchstabe | Kontext | Code
+--------- | ------- | ----
+A, E, I, J, O, U, Y | | 0
+H | | -
+B| | 1
+P | nicht vor H | 1
+D, T | nicht vor C, S, Z | 2
+F, V, W | | 3
+P | vor H | 3
+G, K, Q | | 4
+C | im Anlaut vor A, H, K, L, O, Q, R, U, X | 4
+C | vor A, H, K, O, Q, U, X außer nach S, Z | 4
+X | nicht nach C, K, Q | 48
+L |  | 5
+M, N |  | 6
+R |  | 7
+S, Z |  | 8
+C | nach S, Z | 8
+C | im Anlaut außer vor A, H, K, L, O, Q, R, U, X | 8
+C | nicht vor A, H, K, O, Q, U, X | 8
+D, T | vor C, S, Z | 8
+X | nach C, K, Q | 8
 
 
 Dass für den Buchstaben "C" die Regel "<em>S</em>C" Vorrang vor der Regel "C<em>H</em>"
@@ -137,7 +72,7 @@ Die Umwandlung eines Wortes erfolgt in 3 Schritten:
 <li>Entfernen aller Codes "0" außer am Anfang.</li>
 </ol>
 
-<h3>Beispiel</h3>
+###Beispiel
 Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
 
 <ol>
@@ -145,3 +80,30 @@ Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
 <li>Entfernen aller mehrfachen Codes: 6050750206802</li>
 <li>Entfernen aller Codes "0": 65752682</li>
 </ol>
+
+Code Beispiele
+--------------
+###PHP
+```php
+require_once 'x3m_soundex_ger.php';
+$phoneticcode = soundex_ger("Meier");
+```
+
+###Oracle PL/SQL
+
+#####Funktion: SOUNDEX_GER()
+
+
+```sql
+Select SOUNDEX_GER('Meier'), SOUNDEX_GER('Meyer') from Dual
+```
+
+#####Funktion: SOUNDEX\_GER_MW()
+
+Die Funktion **SOUNDEX\_GER_MW()** dient als Multi-Word-Wrapper von **SOUNDEX_GER()**. d.h. Die Funktion bricht den Eingabe-String in einzelne Worte auf und codiert jedes einzelne Wort mit **SOUNDEX_GER()**.
+
+```sql
+Select SOUNDEX_GER_MW('Mueller Luedenscheidt') from Dual
+```
+
+> Die Multi-Word-Funktion ist deshalb wichtig, weil auch schon das im Netz üblicherweise dokumentierte Beispiel Müller-Lüdenscheidt eigentlich falsch gewählt ist. Müller-Lüdenscheidt sind 2 Wörter und damit gibt es 2 Anlaute und 2 Auslaute. Bei diesem Beispiel tritt das nicht zu Tage, aber z.B. bei Heinz Classen (im Unterschied zu HeinzClassen, was nämlich normalerweise kodiert würde). Wird "Heinz Classen" mit der üblichen Implementierung kodiert und dabei ignoriert, dass es sich um 2 Wörter handelt, dann entsteht 068586, wobei Z zu 8 und C ebenfalls zu 8 wird und die zweite 8 entfällt. Wird es als zwei Wörter behandelt, dann wird C zu 4 und bleibt erhalten, also 068 4586.
