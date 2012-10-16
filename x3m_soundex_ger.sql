@@ -1,23 +1,23 @@
 /**
 	Inhalt:
-		SOUNDEX_GER():       Codierung deutscher Namen nach dem Kölner Verfahren
-		SOUNDEX_GER_MW():    Multi-Word-Wrapper für SOUNDEX_GER()
+		SOUNDEX_GER():       Codierung deutscher Namen nach dem KÃ¶lner Verfahren
+		SOUNDEX_GER_MW():    Multi-Word-Wrapper fÃ¼r SOUNDEX_GER()
 
 **/
 
 
   /**
-   * Oracle PL/SQL Function: "German Phonetic" - Phonetik für die deutsche Sprache nach dem Kölner Verfahren
+   * Oracle PL/SQL Function: "German Phonetic" - Phonetik fÃ¼r die deutsche Sprache nach dem KÃ¶lner Verfahren
    *
-   * Die Kölner Phonetik (auch Kölner Verfahren) ist ein phonetischer Algorithmus, 
-   * der Wörtern nach ihrem Sprachklang eine Zeichenfolge zuordnet, den phonetischen 
-   * Code. Ziel dieses Verfahrens ist es, gleich klingenden Wörtern den selben Code 
-   * zuzuordnen, um bei Suchfunktionen eine Ähnlichkeitssuche zu implementieren. Damit 
-   * ist es beispielsweise möglich, in einer Namensliste Einträge wie "Meier" auch unter 
+   * Die KÃ¶lner Phonetik (auch KÃ¶lner Verfahren) ist ein phonetischer Algorithmus, 
+   * der WÃ¶rtern nach ihrem Sprachklang eine Zeichenfolge zuordnet, den phonetischen 
+   * Code. Ziel dieses Verfahrens ist es, gleich klingenden WÃ¶rtern den selben Code 
+   * zuzuordnen, um bei Suchfunktionen eine Ã„hnlichkeitssuche zu implementieren. Damit 
+   * ist es beispielsweise mÃ¶glich, in einer Namensliste EintrÃ¤ge wie "Meier" auch unter 
    * anderen Schreibweisen, wie "Maier", "Mayer" oder "Mayr", zu finden. 
    * 
-   * Die Kölner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren, 
-   * besser auf die deutsche Sprache abgestimmt. Sie wurde 1969 von Postel veröffentlicht.
+   * Die KÃ¶lner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren, 
+   * besser auf die deutsche Sprache abgestimmt. Sie wurde 1969 von Postel verÃ¶ffentlicht.
    *
    * Infos: http://www.uni-koeln.de/phil-fak/phonetik/Lehre/MA-Arbeiten/magister_wilz.pdf
    *
@@ -27,7 +27,7 @@
    * 2. entfernen aller mehrfachen Codes
    * 3. entfernen aller Codes "0" ausser am Anfang
    * 
-   * Beispiel  Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
+   * Beispiel  Der Name "MÃ¼ller-LÃ¼denscheidt" wird folgendermaÃŸen kodiert:
    *
    * 1. buchstabenweise Codierung: 60550750206880022 
    * 2. entfernen aller mehrfachen Codes: 6050750206802 
@@ -68,12 +68,12 @@
    * ---------------------------------------------------------------------
    *
    * @package    x3m
-   * @version    1.3
+   * @version    1.2
    * @author     Andy Theiler <andy.theiler@x3m.ch>
-   * @copyright  Copyright (c) 1996 - 2012, Xtreme Software GmbH, Switzerland (www.x3m.ch)
+   * @copyright  Copyright (c) 1996 - 2010, Xtreme Software GmbH, Switzerland (www.x3m.ch)
    * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
-   * 
-   * W.Frick, 10/2011: Bug Fixe, Performance Tuning (Dauer ca. 1/3 gegenüber Original) und Multi-Word Version SOUNDEX_GER_MW()
+   *
+   * W.Frick, 10/2011: Bug Fix & Performance Tuning (Dauer ca. 1/3 gegenÃ¼ber Original) und Multi-Word Version SOUNDEX_GER_MW()
    */
    
    CREATE OR REPLACE FUNCTION "SOUNDEX_GER" (strWord IN VARCHAR2,
@@ -96,23 +96,23 @@
 
    
         -- Umwandlung:
-        -- v->f, w->f, j->i, y->i, ph->f, ä->a, ö->o, ü->u, ß->ss, é->e, è->e, à->a, ç->c
+        -- v->f, w->f, j->i, y->i, ph->f, Ã¤->a, Ã¶->o, Ã¼->u, ÃŸ->ss, Ã©->e, Ã¨->e, Ã ->a, Ã§->c
         -- Nur Buchstaben (keine Zahlen, keine Sonderzeichen)
 
         Word := REGEXP_REPLACE(
 			REPLACE(
 				REPLACE(
-					Translate(Word, 'vwjyäöüéèêàáç', 'ffiiaoueeeaac'),
+					Translate(Word, 'vwjyÃ¤Ã¶Ã¼Ã©Ã¨ÃªÃ Ã¡Ã§', 'ffiiaoueeeaac'),
 				'ph', 'f'),
-			'ß', 'ss'),
+			'ÃŸ', 'ss'),
 		'/[^a-zA-Z]/', Null);
 
 
         WordLen := LENGTH(Word);
-	-- Wir hängen bei 1-buchstabigen Strings ein Leerzeichen an, sonst funktioniert die Anlautprüfung auf den zweiten Buchstaben nicht. 
+	-- Wir hÃ¤ngen bei 1-buchstabigen Strings ein Leerzeichen an, sonst funktioniert die AnlautprÃ¼fung auf den zweiten Buchstaben nicht. 
 	If WordLen = 1 Then Word := Word || ' ' ; End If;
    
-        -- Sonderfälle bei Wortanfang (Anlaut)
+        -- SonderfÃ¤lle bei Wortanfang (Anlaut)
         if substr(Word,1,1) = 'c' then
            -- vor a,h,k,l,o,q,r,u,x
            case

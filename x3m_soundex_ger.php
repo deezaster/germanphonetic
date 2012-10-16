@@ -1,24 +1,24 @@
 <?php
  
  //TEST
- //echo "<br>ärger = " . germanphonetic("ärger");
- //echo "<br>aerger = " . germanphonetic("aerger");
- //echo "<br>erker = " . germanphonetic("erker");
- //echo "<br>berserker = " . germanphonetic("berserker");   
+ //echo "<br>Ã¤rger = " . soundex_ger("Ã¤rger");
+ //echo "<br>aerger = " . soundex_ger("aerger");
+ //echo "<br>erker = " . soundex_ger("erker");
+ //echo "<br>berserker = " . soundex_ger("berserker");   
  //exit();
  
   /**
-   * Phonetik für die deutsche Sprache nach dem Kölner Verfahren
+   * Phonetik fÃ¼r die deutsche Sprache nach dem KÃ¶lner Verfahren
    *
-   * Die Kölner Phonetik (auch Kölner Verfahren) ist ein phonetischer Algorithmus, 
-   * der Wörtern nach ihrem Sprachklang eine Zeichenfolge zuordnet, den phonetischen 
-   * Code. Ziel dieses Verfahrens ist es, gleich klingenden Wörtern den selben Code 
-   * zuzuordnen, um bei Suchfunktionen eine Ähnlichkeitssuche zu implementieren. Damit 
-   * ist es beispielsweise möglich, in einer Namensliste Einträge wie "Meier" auch unter 
+   * Die KÃ¶lner Phonetik (auch KÃ¶lner Verfahren) ist ein phonetischer Algorithmus, 
+   * der WÃ¶rtern nach ihrem Sprachklang eine Zeichenfolge zuordnet, den phonetischen 
+   * Code. Ziel dieses Verfahrens ist es, gleich klingenden WÃ¶rtern den selben Code 
+   * zuzuordnen, um bei Suchfunktionen eine Ã„hnlichkeitssuche zu implementieren. Damit 
+   * ist es beispielsweise mÃ¶glich, in einer Namensliste EintrÃ¤ge wie "Meier" auch unter 
    * anderen Schreibweisen, wie "Maier", "Mayer" oder "Mayr", zu finden. 
    * 
-   * Die Kölner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren, 
-   * besser auf die deutsche Sprache abgestimmt. Sie wurde 1969 von Postel veröffentlicht.
+   * Die KÃ¶lner Phonetik ist, im Vergleich zum bekannteren Russell-Soundex-Verfahren, 
+   * besser auf die deutsche Sprache abgestimmt. Sie wurde 1969 von Postel verÃ¶ffentlicht.
    *
    * Infos: http://www.uni-koeln.de/phil-fak/phonetik/Lehre/MA-Arbeiten/magister_wilz.pdf
    *
@@ -28,7 +28,7 @@
    * 2. entfernen aller mehrfachen Codes
    * 3. entfernen aller Codes "0" ausser am Anfang
    * 
-   * Beispiel  Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
+   * Beispiel  Der Name "MÃ¼ller-LÃ¼denscheidt" wird folgendermaÃŸen kodiert:
    *
    * 1. buchstabenweise Codierung: 60550750206880022 
    * 2. entfernen aller mehrfachen Codes: 6050750206802 
@@ -73,7 +73,7 @@
    * @copyright  Copyright (c) 1996 - 2012, Xtreme Software GmbH, Switzerland (www.x3m.ch)
    * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License   
    */  
-   function germanphonetic($word) 
+   function soundex_ger($word) 
    {
       //echo "<br>input: <b>" . $word . "</b>";
       
@@ -82,8 +82,8 @@
       
       if (strlen($word) < 1) { return ""; }
       
-      // Umwandlung: v->f, w->f, j->i, y->i, ph->f, ä->a, ö->o, ü->u, ß->ss, é->e, è->e, ê->e, à->a, á->a, â->a, ë->e
-      $word = str_replace(array("ç","v","w","j","y","ph","ä","ö","ü","ß","é","è","ê","à","á","â","ë"), array("c","f","f","i","i","f","a","o","u","ss","e","e","e","a","a","a","e"), $word);      
+      // Umwandlung: v->f, w->f, j->i, y->i, ph->f, Ã¤->a, Ã¶->o, Ã¼->u, ÃŸ->ss, Ã©->e, Ã¨->e, Ãª->e, Ã ->a, Ã¡->a, Ã¢->a, Ã«->e
+      $word = str_replace(array("Ã§","v","w","j","y","ph","Ã¤","Ã¶","Ã¼","ÃŸ","Ã©","Ã¨","Ãª","Ã ","Ã¡","Ã¢","Ã«"), array("c","f","f","i","i","f","a","o","u","ss","e","e","e","a","a","a","e"), $word);      
       //echo "<br>optimiert1: <b>" . $word . "</b>";
             
       // Nur Buchstaben (keine Zahlen, keine Sonderzeichen)
@@ -96,7 +96,7 @@
       $char    = str_split($word);
      
      
-      // Sonderfälle bei Wortanfang (Anlaut)
+      // SonderfÃ¤lle bei Wortanfang (Anlaut)
       if ($char[0] == 'c') 
       {
          // vor a,h,k,l,o,q,r,u,x
@@ -239,7 +239,7 @@
          }
       }   
       
-      // Mehrfach Codes entfernen und Rückgabe
+      // Mehrfach Codes entfernen und RÃ¼ckgabe
       // v1.1 (06.08.2010) Thorsten Gottlob <tgottlob@web.de> 
       return preg_replace("/(.)\\1+/", "\\1", $phoneticcode);
    }
