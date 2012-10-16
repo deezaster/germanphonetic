@@ -105,7 +105,7 @@
 					Translate(Word, 'vwjyäöüéèêàáç', 'ffiiaoueeeaac'),
 				'ph', 'f'),
 			'ß', 'ss'),
-		'/[^a-zA-Z]/', Null);
+		'[^a-zA-Z]', Null);
 
 
         WordLen := LENGTH(Word);
