@@ -216,7 +216,7 @@
    Begin
 	i := 1;
 	out_string := null ;
-	--16.10.2012 Andy Theiler: Zeilenumbrüche entfernen! 
+	--16.10.2012 Andy Theiler: Zeilenumbruch entfernen bzw wie eine Worttrennung behandeln.
 	--in_string := substr(Translate(strWord,'.,-;','    '),1,4000);
 	in_string := REGEXP_REPLACE(substr(Translate(strWord,'.,-;','    '),1,4000),  '([[:cntrl:]])|(^\t)', ' ');   
 	
