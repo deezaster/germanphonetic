@@ -216,7 +216,10 @@
    Begin
 	i := 1;
 	out_string := null ;
-	in_string := substr(Translate(strWord,'.,-;','    '),1,4000);
+	--16.10.2012 Andy Theiler: Zeilenumbrüche entfernen! 
+	--in_string := substr(Translate(strWord,'.,-;','    '),1,4000);
+	in_string := REGEXP_REPLACE(substr(Translate(strWord,'.,-;','    '),1,4000),  '([[:cntrl:]])|(^\t)', ' ');   
+	
 	len := Length(in_string) ;
 
         while i <= len loop
