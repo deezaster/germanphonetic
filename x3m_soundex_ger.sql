@@ -189,9 +189,10 @@
            intX := intX + 1;
         end loop;
       
-        -- Erst alle "0"-Codes, dann Mehrfach Codes entfernen
-        PhoneticCode := regexp_replace(Translate(Code, '1234567890', '123456789'), '(.)\1+', '\1');
-
+        -- Issue #3: zuerst die mehrfachen Codes entfernen und erst dann die "0" eliminieren
+        -- PhoneticCode := regexp_replace(Translate(Code, '1234567890', '123456789'), '(.)\1+', '\1');
+        PhoneticCode := Translate(regexp_replace(Code, '(.)\1+', '\1'), '1234567890', '123456789');
+        
 	-- Am Wortanfang bleiben "0"-Codes erhalten
         IF  Substr(Code,1,1) = '0' THEN PhoneticCode := '0' || PhoneticCode;  END IF;
 
