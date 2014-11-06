@@ -69,9 +69,9 @@
    * ---------------------------------------------------------------------
    *   
    * @package    x3m
-   * @version    1.2
+   * @version    1.3
    * @author     Andy Theiler <andy@x3m.ch>
-   * @copyright  Copyright (c) 1996 - 2012, Xtreme Software GmbH, Switzerland (www.x3m.ch)
+   * @copyright  Copyright (c) 1996 - 2014, Xtreme Software GmbH, Switzerland (www.x3m.ch)
    * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License   
    */  
    function soundex_ger($word) 
