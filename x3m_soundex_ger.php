@@ -1,6 +1,7 @@
 <?php
  
  //TEST
+ //echo "<br>c = " . soundex_ger("c");
  //echo "<br>röhre = " . soundex_ger("röhre");
  //echo "<br>ärger = " . soundex_ger("ärger");
  //echo "<br>aerger = " . soundex_ger("aerger");
@@ -100,24 +101,32 @@
       // Sonderfälle bei Wortanfang (Anlaut)
       if ($char[0] == 'c') 
       {
-         // vor a,h,k,l,o,q,r,u,x
-         switch ($char[1]) {
-            case 'a':
-            case 'h':
-            case 'k':
-            case 'l':
-            case 'o':
-            case 'q':
-            case 'r':
-            case 'u':
-            case 'x':
-               $code = "4";
-               break;
-            default:
-               $code = "8";
-               break;
-         }                   
+         if ($wordlen == 1) 
+         {
+         $code = 8;
          $x = 1;
+      } 
+      else 
+      {
+         // vor a,h,k,l,o,q,r,u,x
+            switch ($char[1]) {
+             case 'a':
+             case 'h':
+             case 'k':
+             case 'l':
+             case 'o':
+             case 'q':
+             case 'r':
+             case 'u':
+             case 'x':
+                $code = "4";
+                break;
+             default:
+                $code = "8";
+                break;
+            }                   
+            $x = 1;
+        }
       }
       else 
       {
