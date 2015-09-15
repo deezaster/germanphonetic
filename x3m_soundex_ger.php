@@ -208,8 +208,10 @@
                      case 'k':
                      case 'q':
                         $code .= "8";
+                        break;
                      default:
                         $code .= "48";
+                        break;
                   }
                }
                else {                  
