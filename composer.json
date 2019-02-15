@@ -1,0 +1,14 @@
+{
+    "name": "x3m/germanphonetic",
+    "description": "Cologne phonetics implementations in PHP and SQL",
+    "type": "library",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "deezaster",
+            "email": "andy.theiler@x3m.ch"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
