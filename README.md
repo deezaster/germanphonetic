@@ -72,7 +72,7 @@ Die Umwandlung eines Wortes erfolgt in 3 Schritten:
 <li>Entfernen aller Codes "0" außer am Anfang.</li>
 </ol>
 
-###Beispiel
+### Beispiel
 Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
 
 <ol>
@@ -83,22 +83,22 @@ Der Name "Müller-Lüdenscheidt" wird folgendermaßen kodiert:
 
 Code Beispiele
 --------------
-###PHP
+### PHP
 ```php
 require_once 'x3m_soundex_ger.php';
 $phoneticcode = soundex_ger("Meier");
 ```
 
-###Oracle PL/SQL
+### Oracle PL/SQL
 
-#####Funktion: SOUNDEX_GER()
+##### Funktion: SOUNDEX_GER()
 
 
 ```sql
 Select SOUNDEX_GER('Meier'), SOUNDEX_GER('Meyer') from Dual
 ```
 
-#####Funktion: SOUNDEX\_GER_MW()
+##### Funktion: SOUNDEX\_GER_MW()
 
 Die Funktion **SOUNDEX\_GER_MW()** dient als Multi-Word-Wrapper von **SOUNDEX_GER()**. d.h. Die Funktion bricht den Eingabe-String in einzelne Worte auf und codiert jedes einzelne Wort mit **SOUNDEX_GER()**.
 
