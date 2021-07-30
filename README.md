@@ -9,6 +9,8 @@ Implementationen
 
 - **PHP**: `x3m_soundex_ger.php`
 
+- **Kotlin**: `PhoneticConverter.kt` (Danke Steffen Halstrick <steffenhalstrick@t-online.de>)
+
 
 Einleitung
 ----------
