@@ -71,7 +71,7 @@ function soundex_ger($word)
    //echo "<br>input: <b>" . $word . "</b>";
 
    $code = "";
-   $word = strtolower($word);
+   $word = mb_strtolower($word);
 
    if (strlen($word) < 1) {
       return "";
