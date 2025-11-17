@@ -87,7 +87,7 @@ function soundex_ger($word)
 
 
    $wordlen = strlen($word);
-   $char = str_split($word);
+   $char = str_split($word) ?: [''];
 
 
    // Sonderfälle bei Wortanfang (Anlaut)
@@ -228,7 +228,7 @@ function soundex_ger($word)
    // entfernen aller Codes "0" ausser am Anfang
    $codelen = strlen($code);
    $num = array();
-   $num = str_split($code);
+   $num = str_split($code) ?: [''];
    $phoneticcode = $num[0];
 
    for ($x = 1; $x < $codelen; $x++) {
@@ -241,3 +241,4 @@ function soundex_ger($word)
 }
 
 ?>
+
